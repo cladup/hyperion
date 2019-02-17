@@ -1,5 +1,8 @@
 # API Reference
 
+## http://stolenbyte.kr:8080
+Test Server
+
 ## GET /api/campaign/get/[campaign number]
 
 Get Camapaign Data
