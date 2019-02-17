@@ -7,7 +7,6 @@ from django.shortcuts import render
 from rest_framework import routers, serializers, viewsets, generics, mixins, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from drf_braces.mixins import MultipleSerializersViewMixin
 
 from django.db.models import Q
 
