@@ -3,5 +3,5 @@
 
 ## GET /api/campaign/get/[campaign number]
 
-*Description
-**Get Campaign Data
+* Description
+  * Get Campaign Data
