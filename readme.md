@@ -9,11 +9,15 @@ Get Camapaign Data
 
 Set or Update Camapaign Data
 > **Note:** In case of update, the corresponding "id" value must exist before the data can be updated
-> 
-PoC
+
+ - Set data - "id" value not required
+ - Update data - "id" value required
+
+### Dataset Proof of concept
 ```
-Content-Type: application/json
-Test Parameter
+* Content-Type: application/json
+
+* Test Parameter
 {
     "company":"Campaigns 2",
     "title":"Campaigns 2",
