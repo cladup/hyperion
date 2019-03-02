@@ -1,7 +1,7 @@
 # API Reference
 
-## http://stolenbyte.kr:8080
-Test Server
+## Test Server
+http://stolenbyte.kr:8080
 
 ## GET /api/campaign/get/[campaign number]
 
