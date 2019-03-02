@@ -12,14 +12,14 @@ Get Camapaign Data
 
 Set Camapaign Data
 
-## DELETE /api/v1/campaigns/[campaign number]
-
-Delete Camapaign Data
-
 ## PUT /api/v1/campaigns/[campaign number]
 
 Update Camapaign Data
 > **Note:** "id" value in dataset required
+
+## DELETE /api/v1/campaigns/[campaign number]
+
+Delete Camapaign Data
 
 ## Dataset Proof of concept
 ```
