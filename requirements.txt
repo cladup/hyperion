@@ -1,6 +1,7 @@
 dateutils==0.6.6
 Django==1.11.20
 django-cors-headers==2.4.0
+django-dotenv==1.4.2
 django-filter==2.1.0
 django-rest-framework-braces==0.3.2
 djangorestframework==3.9.1
