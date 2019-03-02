@@ -107,5 +107,5 @@ venv.bak/
 sftp-config.json
 
 # yaml files
-deployment/*.yaml
+k8s-templates/*.yaml
 
