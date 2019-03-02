@@ -34,15 +34,16 @@ class api_campaigns(
 		return self.retrieve(request, *args, **kwargs)
 
 	def post(self, request, *args, **kwargs):
-		c = self.create(request, *args, **kwargs)
-		if c:
-			return Response({'result': 'success', 'data': c.data}, status=status.HTTP_201_CREATED)
+		created = self.create(request, *args, **kwargs)
+		if created:
+			return Response({'result': 'success', 'data': created.data}, status=status.HTTP_201_CREATED)
 
 		return Response({'result': 'error'}, status=status.HTTP_400_BAD_REQUEST)
 
 	def put(self, request, *args, **kwargs):
-		if self.update(request, *args, **kwargs):
-			return Response({'result': 'success'}, status=status.HTTP_200_OK)
+		updated = self.update(request, *args, **kwargs)
+		if updated:
+			return Response({'result': 'success', 'data': updated.data}, status=status.HTTP_200_OK)
 
 		return Response({'result': 'error'}, status=status.HTTP_400_BAD_REQUEST)
 
