@@ -32,7 +32,7 @@ print("Done!")
 
 # Create kubernetes deployment yaml
 with open("k8s-templates/hyperion-deployment.yaml", "w") as f:
-    template = yaml.full_load(open("k8s-templates/hyperion-deployment.yaml.template"))
+    template = yaml.load(open("k8s-templates/hyperion-deployment.yaml.template"))
     template['spec']['template']['spec']['containers'][0]['image'] = docker_image_url
     yaml.dump(template, f, default_flow_style=False)
 
