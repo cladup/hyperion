@@ -3,14 +3,11 @@
 # coded by StolenByte
 __AUTHOR__ = 'StolenByte [thscndgh@gmail.com]'
 
+from django.db.models import Q
 from django.shortcuts import render
-from django.http import JsonResponse
-
 from rest_framework import routers, serializers, viewsets, generics, mixins, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
-from django.db.models import Q
 
 from .models import campaigns
 from .serializers import campaigns_serializer, display_stands_serializer
