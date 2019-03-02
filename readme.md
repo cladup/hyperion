@@ -3,20 +3,20 @@
 ## Test Server
 http://stolenbyte.kr:8080
 
-## GET /api/campaigns/[campaign number]
+## GET /api/v1/campaigns/[campaign number]
 
 Get Camapaign Data
 > **Note:** If the campaign number does not  exist, output all data
 
-## POST /api/campaigns/
+## POST /api/v1/campaigns/
 
 Set Camapaign Data
 
-## DELETE /api/campaigns/[campaign number]
+## DELETE /api/v1/campaigns/[campaign number]
 
 Delete Camapaign Data
 
-## PUT /api/campaigns/[campaign number]
+## PUT /api/v1/campaigns/[campaign number]
 
 Update Camapaign Data
 > **Note:** "id" value in dataset required
