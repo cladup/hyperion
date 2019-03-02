@@ -7,8 +7,8 @@ import yaml
 
 
 # Import dotenv
-from dotenv import load_dotenv
-load_dotenv(verbose=True)
+import dotenv
+dotenv.read_dotenv()
 
 description = "Hyperion build and push docker image to Google Container Registry"
 parser = argparse.ArgumentParser(description=description)
