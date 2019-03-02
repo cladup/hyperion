@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'z$ldro=!_48=#k2wk2kv!^cqvymdcva-^%6*lwa^fjy*vhxj@z'
+SECRET_KEY = os.getenv("SECRET_KEY", "secret")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", True)
 
-ALLOWED_HOSTS = ['0.0.0.0', '.stolenbyte.kr', '108.61.160.85']
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", '').split(",")
 
 
 # Application definition
@@ -92,11 +92,11 @@ WSGI_APPLICATION = 'api.wsgi.application'
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.mysql',
-		'NAME': 'clad_up',
-		'USER': 'clad_up',
-		'PASSWORD': 'Clad_up2!!',
-		'HOST': '127.0.0.1',
-		'PORT': '3306',
+		'NAME': os.getenv("DATABASE_NAME", "clad_up"),
+		'USER': os.getenv("DATABASE_USER", "clad_up"),
+		'PASSWORD': os.getenv("DATABASE_PASSWORD", "Clad_up2!!"),
+		'HOST': os.getenv("DATABASE_HOST", "127.0.0.1"),
+		'PORT': os.getenv("DATABASE_PORT", "3306"),
 		'DATABASE_COMMAND_TIMEOUT': 30,
 		'OPTIONS': {
 			'sql_mode': 'TRADITIONAL',
