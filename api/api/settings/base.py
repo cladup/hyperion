@@ -41,7 +41,10 @@ INSTALLED_APPS = [
 	# 'rest_api',
 	'rest_api.apps.RestApiConfig',
 	'rest_framework',
-	'corsheaders'
+	'corsheaders',
+
+        # Health check
+        'health_check',
 ]
 
 REST_FRAMEWORK = {

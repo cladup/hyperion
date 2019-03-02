@@ -21,4 +21,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include('rest_api.urls'), name='rest_api_home'),
+    url(r'^_/health/', include('health_check.urls')),
 ]
