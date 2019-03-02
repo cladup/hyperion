@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hyperion
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: hyperion
+  template:
+    metadata:
+      labels:
+        run: hyperion
+    spec:
+      containers:
+      - name: hyperion
+        image: {image}
+        ports:
+        - containerPort: 8080
