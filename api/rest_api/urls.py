@@ -14,6 +14,6 @@ router = routers.DefaultRouter()
 urlpatterns = [
 	url(r'^', include(router.urls)),
 	url(r'^{0}/campaigns/$'.format(__VERSION__), api_campaigns.as_view(), name='api_campaigns'),
-	url(r'^{0}/campaigns/(?P<pk>[\d\-]+)/$'.format(__VERSION__), api_campaigns.as_view(), name='api_pk_campaigns'),
+	url(r'^{0}/campaigns/(?P<pk>[\d\-]+)$'.format(__VERSION__), api_campaigns.as_view(), name='api_pk_campaigns'),
 	url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

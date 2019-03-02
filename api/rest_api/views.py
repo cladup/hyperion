@@ -4,6 +4,8 @@
 __AUTHOR__ = 'StolenByte [thscndgh@gmail.com]'
 
 from django.shortcuts import render
+from django.http import JsonResponse
+
 from rest_framework import routers, serializers, viewsets, generics, mixins, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -32,8 +34,9 @@ class api_campaigns(
 		return self.retrieve(request, *args, **kwargs)
 
 	def post(self, request, *args, **kwargs):
-		if self.create(request, *args, **kwargs):
-			return Response({'result': 'success'}, status=status.HTTP_201_CREATED)
+		c = self.create(request, *args, **kwargs)
+		if c:
+			return Response({'result': 'success', 'data': c.data}, status=status.HTTP_201_CREATED)
 
 		return Response({'result': 'error'}, status=status.HTTP_400_BAD_REQUEST)
 
