@@ -44,18 +44,67 @@ class campaigns_serializer(serializers.ModelSerializer):
 		)
 
 	def create(self, validated_data):
-		# dss = validated_data.pop('display_stands')
 		c_id = self.initial_data.get('id')
 		dss = self.initial_data.get('display_stands')
 
-		if c_id:
-			c = Campaigns.objects.filter(Q(id=c_id))
-			if c.exists():
-				c = c.first()
-			else:
-				return None
+		c = Campaigns.objects.create()
+		c.company = self.initial_data.get('company')
+		c.title = self.initial_data.get('title')
+		c.position_x = self.initial_data.get('position_x')
+		c.position_y = self.initial_data.get('position_y')
+		c.position_z = self.initial_data.get('position_z')
+		c.rotation_x = self.initial_data.get('rotation_x')
+		c.rotation_y = self.initial_data.get('rotation_y')
+		c.rotation_z = self.initial_data.get('rotation_z')
+
+		for ds in dss:
+			d = Display_Stands.objects.create()
+			d.name = ds['name']
+			d.type = ds['type']
+			d.position_x = ds['position_x']
+			d.position_y = ds['position_y']
+			d.position_z = ds['position_z']
+			d.rotation_x = ds['rotation_x']
+			d.rotation_y = ds['rotation_y']
+			d.rotation_z = ds['rotation_z']
+			d.scale = ds['scale']
+			d.format = ds['format']
+			d.click_event = ds['click_event']
+			d.animation = ds['animation']
+
+			for ps in ds['products']:
+				p = Products.objects.create()
+				p.name = ps['name']
+				p.type = ps['type']
+				p.position_x = ps['position_x']
+				p.position_y = ps['position_y']
+				p.position_z = ps['position_z']
+				p.rotation_x = ps['rotation_x']
+				p.rotation_y = ps['rotation_y']
+				p.rotation_z = ps['rotation_z']
+				p.scale = ps['scale']
+				p.format = ps['format']
+				p.click_event = ps['click_event']
+				p.animation = ps['animation']
+				p.save()
+
+				d.products.add(p)
+
+			d.save()
+
+		c.display_stands.add(d)
+		c.save()
+		return c
+
+	def update(self, instance, validated_data):
+		c_id = self.initial_data.get('id')
+		dss = self.initial_data.get('display_stands')
+
+		c = Campaigns.objects.filter(Q(id=instance.id))
+		if c.exists():
+			c = c.first()
 		else:
-			c = Campaigns.objects.create()
+			return None
 
 		c.company = self.initial_data.get('company')
 		c.title = self.initial_data.get('title')
@@ -75,7 +124,7 @@ class campaigns_serializer(serializers.ModelSerializer):
 				else:
 					continue
 			else:
-				d = Display_Stands.objects.create()
+				return None
 			
 			d.name = ds['name']
 			d.type = ds['type']
@@ -99,7 +148,7 @@ class campaigns_serializer(serializers.ModelSerializer):
 					else:
 						continue
 				else:
-					p = Products.objects.create()
+					return None
 
 				p.name = ps['name']
 				p.type = ps['type']
