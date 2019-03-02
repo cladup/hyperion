@@ -1,0 +1,42 @@
+#!/usr/bin/env python
+import argparse
+import sys
+import subprocess
+import os
+import yaml
+
+
+# Import dotenv
+from dotenv import load_dotenv
+load_dotenv(verbose=True)
+
+description = "Hyperion build and push docker image to Google Container Registry"
+parser = argparse.ArgumentParser(description=description)
+parser.add_argument("-t", "--tag", help="Tag version of docker image", dest="tag", default="")
+args = parser.parse_args()
+
+# TODO: Change this into regular expression
+if len(args.tag) != 5:
+    print("Version must be in format: 0.0.1")
+    sys.exit()
+
+# Authenticate docker configuration
+print("Build and push docker image.")
+subprocess.run(["gcloud", "auth", "configure-docker"])
+# Build docker image
+docker_image_url = "us.gcr.io/{}/hyperion:{}".format(os.environ.get("PROJECT_ID"), args.tag)
+subprocess.run(["docker", "build", "-t", "hyperion/{}".format(args.tag), "--file=deployment/production.Dockerfile", "."])
+subprocess.run(["docker", "tag", "hyperion/{}".format(args.tag), docker_image_url])
+subprocess.run(["docker", "push", docker_image_url])
+print("Done!")
+
+# Create kubernetes deployment yaml
+with open("k8s-templates/hyperion-deployment.yaml", "w") as f:
+    template = yaml.full_load(open("k8s-templates/hyperion-deployment.yaml.template"))
+    template['spec']['template']['spec']['containers'][0]['image'] = docker_image_url
+    yaml.dump(template, f, default_flow_style=False)
+
+# Deploy to GKE
+subprocess.run(["kubectl", "apply", "-f", "k8s-templates/hyperion-deployment.yaml"])
+subprocess.run(["kubectl", "rollout", "status", "deployment", "hyperion"])
+
