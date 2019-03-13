@@ -86,13 +86,13 @@ class campaigns_serializer(serializers.ModelSerializer):
 				p.format = ps['format']
 				p.click_event = ps['click_event']
 				p.animation = ps['animation']
+				
 				p.save()
-
 				d.products.add(p)
 
 			d.save()
+			c.display_stands.add(d)
 
-		c.display_stands.add(d)
 		c.save()
 		return c
 
